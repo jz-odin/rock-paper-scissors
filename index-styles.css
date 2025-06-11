@@ -1,0 +1,36 @@
+*{margin:0;padding:0;box-sizing: border-box;}
+.game-screen{
+    margin: 0 auto;
+    background-color:blueviolet;
+    min-height: 30vh;
+}
+
+.game-screen .results{
+    height: 15vh;
+    background-color: aliceblue;
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 10px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 800;
+    font-size: 34px;
+}
+
+.game-screen .options{
+    background-color: blanchedalmond;
+    display:flex;
+    justify-content: space-around;
+    width: 60%;
+    margin: 0 auto;
+}
+
+.options button{
+    height:100px;
+    width:100px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+}

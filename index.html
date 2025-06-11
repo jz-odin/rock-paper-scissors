@@ -4,14 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="index-styles.css" rel="stylesheet">
 </head>
 <body>
-    
+    <div class="game-screen">
+        <div class="results">
+            <p class="score-result">Play The Game!!! Rock Paper Scissors</p>
+            <p class="round-result"></p>
+        </div>
+        <div class="options">
+            <button>Rock</button>
+            <button>Paper</button>
+            <button>Scissors</button> 
+        </div>
+    </div>
 </body>
 </html>
 <script>
+    let roundResult = document.querySelector(".round-result");
+    let scoreScreen = document.querySelector(".score-result");
     let humanScore = 0;
     let computerScore = 0;
+    let scoreLog = (humanScore,computerScore) => {
+        scoreScreen.textContent = `Your Score: ${humanScore}.\nComputer Score: ${computerScore}`;}
     function map(num){// number -> string
         if (num===0) {return "Rock";}
         else if (num===1) {return "Paper";}
@@ -21,70 +36,67 @@
         let choice = Math.floor(rand = Math.random()*3);
         return map(choice);
     }
-    function getHumanChoice(){// null ->  string meant to be number (0, 1, 2)
-        return prompt("Throw Hands!!! Enter a Number in 0,1 or 2");
+    
+    let buttons = document.querySelectorAll("button");
+    for(let i = 0;i<buttons.length; i++){
+        buttons[i].addEventListener('click',(event) => {
+            let humanChoice = event.target.textContent
+            console.log("button ",humanChoice);
+            playRound(humanChoice,getComputerChoice());
+        })
     }
-    // console.log(getHumanChoice());
+
+    console.log(roundResult, scoreScreen);
     function playRound(humanChoice, computerChoice){// (str,str)-> null
         humanChoice = humanChoice.toLowerCase();
         computerChoice = computerChoice.toLowerCase();
         if(humanChoice=="rock"){
             if(computerChoice=="rock"){
-                console.log(`Draw! ${humanChoice} draws ${computerChoice}`);
+                roundResult.textContent =  (`Draw! ${humanChoice} draws ${computerChoice}`);
             }
             else if(computerChoice=="paper"){
-                console.log(`You Lose! ${computerChoice} beats ${humanChoice}`);
+                roundResult.textContent =  (`You Lose! ${computerChoice} beats ${humanChoice}`);
                 computerScore++;
             }
             else if(computerChoice=="scissors"){
-                console.log(`You win! ${humanChoice} beats ${computerChoice}`);
+                roundResult.textContent = (`You win! ${humanChoice} beats ${computerChoice}`);
                 humanScore++;
             }
         }
         else if(humanChoice=="paper"){
             if(computerChoice=="rock"){
-                console.log(`You win! ${humanChoice} beats ${computerChoice}`);
+                roundResult.textContent =  (`You win! ${humanChoice} beats ${computerChoice}`);
                 humanScore++;
             }
             else if(computerChoice=="paper"){
-                console.log(`Draw! ${humanChoice} draws ${computerChoice}`);
+                roundResult.textContent =  (`Draw! ${humanChoice} draws ${computerChoice}`);
             }
             else if(computerChoice=="scissors"){
-                console.log(`You Lose! ${computerChoice} beats ${humanChoice}`);
+                roundResult.textContent =  (`You Lose! ${computerChoice} beats ${humanChoice}`);
                 computerScore++;
             }
         }
         else if(humanChoice=="scissors"){
             if(computerChoice=="rock"){
-                console.log(`You Lose! ${computerChoice} beats ${humanChoice}`);
+                roundResult.textContent = (`You Lose! ${computerChoice} beats ${humanChoice}`);
                 computerScore++;
+
             }
             else if(computerChoice=="paper"){
-                console.log(`You win! ${humanChoice} beats ${computerChoice}`);
+                roundResult.textContent = (`You win! ${humanChoice} beats ${computerChoice}`);
                 humanScore++;
             }
             else if(computerChoice=="scissors"){
-                console.log(`Draw! ${humanChoice} draws ${computerChoice}`);
+                roundResult.textContent =  (`Draw! ${humanChoice} draws ${computerChoice}`);
             }
         }
+        scoreLog(humanScore,computerScore);
     }
     function playGame(){
-        for(let round=1; round<=5;round++){
-            humanSelection = map(Number(getHumanChoice()));
-            computerSelection = getComputerChoice();
-            playRound(humanSelection,computerSelection);
-        }
+        
+
+
         let scoreLog = `Your Score: ${humanScore}.\nComputer Score: ${computerScore}`;
-        if(humanScore===computerScore){
-            return "Draw... "+scoreLog;
-        }
-        else if (humanScore>computerScore){
-            return "You win!!! "+scoreLog;
-        }
-        else if(humanScore<computerScore){
-            return "You lose... "+scoreLog;
-        }
+        
     }
-    console.log("Lets play rock paper and scissors");
-    console.log(playGame())
 </script>
